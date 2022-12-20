@@ -2,10 +2,10 @@
 <br>
 ## Contributors :
 
-Idaliouali Imad <!-- les roles -->
-Kadiri Mehdi <!-- les roles -->
-Hmoudou Walid <!-- les roles -->
-Jaada Hamza <!-- les roles -->
+Idaliouali Imad <!-- les roles --> <br>
+Kadiri Mehdi <!-- les roles --><br>
+Hmoudou Walid <!-- les roles --><br>
+Jaada Hamza <!-- les roles --><br>
 
 ## Project Information :
 
