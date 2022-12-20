@@ -4,7 +4,8 @@
     "java.project.referencedLibraries": [
         "lib/**/*.jar",
         "/home/imad/Documents/mysql-connector-j-8.0.31.jar",
-        "C:/Users/HP/Desktop/java-connector/mysql-connector-j-8.0.31"
+        "C:/Users/HP/Desktop/java-connector/mysql-connector-j-8.0.31/mysql-connector-j-8.0.31.jar",
+        "C:/Users/Hp/Downloads/mysql-connector-j-8.0.31/mysql-connector-j-8.0.31.jar"
       
 
     ]
