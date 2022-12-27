@@ -37,11 +37,13 @@ public class database {
       return 0;
    }
 
-   public void register(String fname,String username, String lname, String email, String password) {
+   public void register(String fname,String username, String lname, String email, String password, String Cpassword) {
       try {
-         String query = "INSERT INTO users VALUES ( null ,'" + username + "','" + password + "', null, '" + fname + "','" + lname + "','" + email +"')";
-         stm.executeUpdate(query);
-         JOptionPane.showMessageDialog(null, "User added Successfully.....");
+         if(password.equals(Cpassword)){
+            String query = "INSERT INTO users VALUES ( null ,'" + username + "','" + password + "', null, '" + fname + "','" + lname + "','" + email +"')";
+            stm.executeUpdate(query);
+            JOptionPane.showMessageDialog(null, "User added Successfully.....");
+         }
 
       } catch (Exception e) {
          System.out.println("Erreur:" + e);
