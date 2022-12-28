@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+import controller.*;
+
 public class Register extends JFrame {
 
         private JButton createAccountButton;
@@ -23,11 +25,13 @@ public class Register extends JFrame {
         private JTextField passwordInput;
         private JTextField confirmPasswordInput;
         private JTextField emailInput;
+        private database db;
 
         public Register() {
                 this.setTitle("Register");
                 this.setResizable(false);
                 this.setVisible(true);
+                db = new database();
                 initComponents();
         }
 
@@ -299,7 +303,16 @@ public class Register extends JFrame {
         }
 
         private void createAccountButtonActionPerformed(ActionEvent evt) {
-                // TODO add your handling code here:
+                String firstName = firstNameInput.getText();
+                String lastName = lastNameInput.getText();
+                String username = userNameInput.getText();
+                String password = passwordInput.getText();
+                String confirmPassword = confirmPasswordInput.getText();
+                String email = emailInput.getText();
+                if (db.register(firstName, username, lastName, email, password, confirmPassword)) {
+                        this.dispose();
+                        new Login();
+                }
         }
 
         private void emailInputActionPerformed(ActionEvent evt) {

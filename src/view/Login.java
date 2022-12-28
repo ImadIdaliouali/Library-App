@@ -4,28 +4,32 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+import controller.*;
+
 public class Login extends JFrame {
 
   private JButton connexion;
   private JLabel libTitle;
-  private JLabel emailLabel;
+  private JLabel usernameLabel;
   private JLabel passwordLabel;
   private JButton createAccount;
   private JLabel background;
-  private JTextField emailInput;
+  private JTextField usernameInput;
   private JTextField passwordInput;
+  private database db;
 
   public Login() {
     this.setTitle("Login");
     this.setResizable(false);
     this.setVisible(true);
+    db = new database();
     initComponents();
   }
 
   private void initComponents() {
     libTitle = new JLabel();
-    emailLabel = new JLabel();
-    emailInput = new JTextField();
+    usernameLabel = new JLabel();
+    usernameInput = new JTextField();
     passwordLabel = new JLabel();
     passwordInput = new JTextField();
     connexion = new JButton();
@@ -37,13 +41,13 @@ public class Login extends JFrame {
     libTitle.setFont(new Font("Zilla Slab SemiBold", 1, 24));
     libTitle.setText("ESTE BIBLEOTHEQUE");
 
-    emailLabel.setFont(new Font("Zilla Slab Light", 1, 18));
-    emailLabel.setText("EMAIL :");
+    usernameLabel.setFont(new Font("Zilla Slab Light", 1, 18));
+    usernameLabel.setText("username :");
 
-    emailInput.addActionListener(
+    usernameInput.addActionListener(
         new ActionListener() {
           public void actionPerformed(ActionEvent evt) {
-            emailInputActionPerformed(evt);
+            usernameInputActionPerformed(evt);
           }
         });
 
@@ -118,7 +122,7 @@ public class Login extends JFrame {
                                                 layout
                                                     .createParallelGroup(GroupLayout.Alignment.TRAILING)
                                                     .addComponent(
-                                                        emailInput,
+                                                        usernameInput,
                                                         GroupLayout.PREFERRED_SIZE,
                                                         241,
                                                         GroupLayout.PREFERRED_SIZE)
@@ -127,7 +131,7 @@ public class Login extends JFrame {
                                 layout
                                     .createSequentialGroup()
                                     .addGap(119, 119, 119)
-                                    .addComponent(emailLabel))
+                                    .addComponent(usernameLabel))
                             .addGroup(
                                 layout
                                     .createSequentialGroup()
@@ -152,10 +156,10 @@ public class Login extends JFrame {
                         38,
                         GroupLayout.PREFERRED_SIZE)
                     .addGap(18, 18, 18)
-                    .addComponent(emailLabel)
+                    .addComponent(usernameLabel)
                     .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(
-                        emailInput,
+                        usernameInput,
                         GroupLayout.PREFERRED_SIZE,
                         GroupLayout.DEFAULT_SIZE,
                         GroupLayout.PREFERRED_SIZE)
@@ -185,7 +189,7 @@ public class Login extends JFrame {
     pack();
   }
 
-  private void emailInputActionPerformed(ActionEvent evt) {
+  private void usernameInputActionPerformed(ActionEvent evt) {
     // TODO add your handling code here:
   }
 
@@ -194,7 +198,17 @@ public class Login extends JFrame {
   }
 
   private void connexionActionPerformed(ActionEvent evt) {
-    // TODO add your handling code here:
+    String username = usernameInput.getText();
+    String password = passwordInput.getText();
+    System.out.println(db.login(username, password) == 1);
+    if (db.login(username, password) == 1) {
+      System.out.println("username: " + username + ", password: " + password);
+      this.dispose();
+      new Register();
+    }
+    else {
+      
+    }
   }
 
   private void createAccountActionPerformed(ActionEvent evt) {
