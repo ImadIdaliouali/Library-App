@@ -23,34 +23,40 @@ public class database {
       }
    }
 
-   public int login(String uname, String password){
-      try{
+   public int login(String uname, String password) {
+      try {
          String query = "select count(*) from users where username='" + uname + "' and password = '" + password + "'";
          rst = stm.executeQuery(query);
          int res = 0;
-         while(rst.next()) res++;
+         while (rst.next())
+            res++;
          return res;
-      }
-      catch(Exception e){
+      } catch (Exception e) {
          System.out.println("Erreur:" + e);
       }
       return 0;
    }
 
-   public void register(String fname,String username, String lname, String email, String password, String Cpassword) {
+   public boolean register(String fname, String username, String lname, String email, String password,
+         String Cpassword) {
       try {
-         if(password.equals(Cpassword)){
-            String query = "INSERT INTO users VALUES ( null ,'" + username + "','" + password + "', null, '" + fname + "','" + lname + "','" + email +"')";
+         if (password.equals(Cpassword)) {
+            String query = "INSERT INTO users VALUES ( null ,'" + username + "','" + password + "', null, '" + fname
+                  + "','" + lname + "','" + email + "')";
             stm.executeUpdate(query);
             JOptionPane.showMessageDialog(null, "User added Successfully.....");
+            return true;
+         } else {
+            JOptionPane.showMessageDialog(null, "Password is not correct");
          }
 
       } catch (Exception e) {
          System.out.println("Erreur:" + e);
       }
+      return false;
    }
 
-   public void addbook(int uid, int bid){
+   public void addbook(int uid, int bid) {
       try {
          String query = "update table users set id_books = " + bid + "where id = " + uid;
          stm.executeUpdate(query);
@@ -60,8 +66,8 @@ public class database {
          System.out.println("Erreur:" + e);
       }
    }
-   
-   public void removebooks(int uid, int bid){
+
+   public void removebooks(int uid, int bid) {
       try {
          String query = "update table users set id_books = null where id = " + uid;
          stm.executeUpdate(query);
@@ -74,7 +80,7 @@ public class database {
    public void deleteuser(int uid, int did) {
       try {
          int admin = stm.executeUpdate("select count(*) from users where id = " + uid + " and admin = 1");
-         if(admin!=0){
+         if (admin != 0) {
             int test = stm.executeUpdate("DELETE FROM users where id=" + did);
             if (test != 0) {
                JOptionPane.showMessageDialog(null, "User Deleted Successfully.....");
@@ -90,7 +96,7 @@ public class database {
    public void deletebook(int uid, int bid) {
       try {
          int admin = stm.executeUpdate("select count(*) from users where id = " + uid + " and admin = 1");
-         if(admin!=0){
+         if (admin != 0) {
             int test = stm.executeUpdate("DELETE FROM books where id=" + bid);
             if (test != 0) {
                JOptionPane.showMessageDialog(null, "Book Deleted Successfully.....");
@@ -106,15 +112,15 @@ public class database {
    public void newbook(int uid, String title, String author, String Description, int Stock, String Cathegory) {
       try {
          int admin = stm.executeUpdate("select count(*) from users where id = " + uid + " and admin = 1");
-         if(admin!=0){
-            stm.executeUpdate("insert into books values ( null,'" + title + "','"+author+"','"+Description + "',"+Stock+",'"+Cathegory+ "')");
+         if (admin != 0) {
+            stm.executeUpdate("insert into books values ( null,'" + title + "','" + author + "','" + Description + "',"
+                  + Stock + ",'" + Cathegory + "')");
             JOptionPane.showMessageDialog(null, "Book Added Successfully.....");
          }
       } catch (Exception e) {
          System.out.println("Erreur:" + e);
       }
    }
-
 
    public void chercher(String title) {
       try {
